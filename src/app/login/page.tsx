@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 
 export default function LoginPage() {
   return (

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
-import { ViewTransitions } from "next-view-transitions";
 import LoadingOverlay from "./components/LoadingOverlay";
 import PullToRefresh from './components/PullToRefresh'
 import LayoutClient from "./LayoutClient";
@@ -30,12 +29,10 @@ export default function RootLayout({
     <html lang="vi">
       <body className={`${inter.variable} ${interTight.variable} antialiased`}>
         <LayoutClient>
-          <ViewTransitions>
-            <LoadingOverlay />
-            <PullToRefresh>
-              {children}
-            </PullToRefresh>
-          </ViewTransitions>
+          <LoadingOverlay />
+          <PullToRefresh>
+            {children}
+          </PullToRefresh>
         </LayoutClient>
       </body>
     </html>

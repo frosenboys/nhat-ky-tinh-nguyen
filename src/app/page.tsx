@@ -1,103 +1,81 @@
-import Image from "next/image";
+import HeaderNav from '@/app/components/HeaderNav'
+import Image from 'next/image'
+import { Link } from 'next-view-transitions'
+import { FaRegBell } from 'react-icons/fa'
 
-export default function Home() {
+export default function HomePage() {
+  const features = [
+    { name: 'Bản tin', icon: '/icons/news.svg', href: '/login' },
+    { name: 'Nhiệm vụ', icon: '/icons/mission.svg', href: '/nhiemvu' },
+    { name: 'Nhật ký', icon: '/icons/diary.svg', href: '/nhatky' },
+    { name: 'Bộ sưu tập', icon: '/icons/collection.svg', href: '/bosuutap' },
+    { name: 'Chatbot', icon: '/icons/chatbot.svg', href: '/chatbot' },
+    { name: 'Bản đồ số', icon: '/icons/map.svg', href: '/bandos' },
+    { name: 'Bảng xếp hạng', icon: '/icons/ranking.svg', href: '/bangxephang' },
+    { name: 'Tất cả', icon: '/icons/all.svg', href: '/tatca' }
+  ]
+
+  const suggestions = Array(2).fill('/images/test.png')
+  const mainImgs = Array(3).fill('/images/test.png')
+
+  
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen flex flex-col pb-24">
+      {/* HEADER */}
+      <div className="bg-main-gradient text-white p-4 rounded-b-3xl relative mb-5">
+        <HeaderNav />
+        <div className="flex items-center">
+          <Image
+            src="/images/avt.jpg"
+            alt="Avatar"
+            width={50}
+            height={50}
+            className="rounded-full border-2 border-white"
+          />
+          <div className="ml-3">
+            <p className="text-sm font-semibold">CHÀO MỪNG!</p>
+            <p className="text-sm">Đ/c: Dư Thị Thanh Xuân</p>
+          </div>
+          <div className="ml-auto relative bg-white p-2 rounded-full shadow-md">
+            <FaRegBell className="text-[30px] text-black p-1" />
+            <span className="absolute top-1 right-1 block w-2.5 h-2.5 bg-yellow-400 rounded-full ring-2 ring-white"></span>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* GRID ICONS */}
+      <div className="grid grid-cols-4 gap-4 px-6 py-5">
+        {features.map((item, i) => (
+          <Link key={i} href={item.href} className="flex flex-col items-center text-center hover:scale-105 transition-transform">
+            <div className="w-18 h-18 rounded-full bg-main-gradient flex justify-center items-center shadow-md">
+              <Image src={item.icon} alt={item.name} width={40} height={40} />
+            </div>
+            <p className="text-xs mt-2 font-medium text-gray-700">{item.name}</p>
+          </Link>
+        ))}
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-5">
+        <h2 className="text-gray-700 text-sm font-medium mx-3 mb-3">
+          Mỗi ngày một tin tốt, một cuốn sách hay, một câu chuyện đẹp
+        </h2>
+        <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
+          {mainImgs.map((img, i) => (
+            <Image key={i} src={img} alt="suggest" width={140} height={90} className="rounded-xl object-cover flex-shrink-0 w-29" />
+          ))}
+        </div>
+
+        <h2 className="text-gray-700 font-medium mx-5 mt-3">
+          Gợi ý
+        </h2>
+        <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
+          {suggestions.map((img, i) => (
+            <Image key={i} src={img} alt="suggest" width={140} height={90} className="rounded-xl object-cover flex-shrink-0 w-45" />
+          ))}
+        </div>
+      </div>
     </div>
-  );
+  )
 }

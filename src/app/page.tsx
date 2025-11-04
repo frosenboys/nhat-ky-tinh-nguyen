@@ -1,24 +1,21 @@
 import HeaderNav from '@/app/components/HeaderNav'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaRegBell } from 'react-icons/fa'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage() {
   const features = [
-    { name: 'Bản tin', icon: '/icons/news.svg', href: '/login' },
-    { name: 'Nhiệm vụ', icon: '/icons/mission.svg', href: '/nhiemvu' },
-    { name: 'Nhật ký', icon: '/icons/diary.svg', href: '/nhatky' },
-    { name: 'Bộ sưu tập', icon: '/icons/collection.svg', href: '/bosuutap' },
-    { name: 'Chatbot', icon: '/icons/chatbot.svg', href: '/chatbot' },
-    { name: 'Bản đồ số', icon: '/icons/map.svg', href: '/bandos' },
-    { name: 'Bảng xếp hạng', icon: '/icons/ranking.svg', href: '/bangxephang' },
-    { name: 'Tất cả', icon: '/icons/all.svg', href: '/tatca' }
+    { name: 'Bản tin', icon: faNewspaper, href: '/news' },
+    { name: 'Nhiệm vụ', icon: faListCheck, href: '/mission' },
+    { name: 'Nhật ký', icon: faBook, href: '/diary' },
+    { name: 'Chatbot', icon: faComment, href: '/chatbot' },
+    { name: 'Bản đồ số', icon: faMapLocationDot, href: '/digimap' },
+    { name: 'Bảng xếp hạng', icon: faRankingStar, href: '/ranking' },
   ]
 
   const suggestions = Array(2).fill('/images/test.png')
   const mainImgs = Array(3).fill('/images/test.png')
-
-  
 
   return (
     <div className="min-h-screen flex flex-col pb-24">
@@ -27,29 +24,25 @@ export default function HomePage() {
         <HeaderNav />
         <div className="flex items-center">
           <Image
-            src="/images/avt.jpg"
+            src="/images/default-avatar.svg"
             alt="Avatar"
             width={50}
             height={50}
-            className="rounded-full border-2 border-white"
+            className="rounded-full border-2 border-white bg-white"
           />
           <div className="ml-3">
             <p className="text-sm font-semibold">CHÀO MỪNG!</p>
             <p className="text-sm">Đ/c: Dư Thị Thanh Xuân</p>
           </div>
-          <div className="ml-auto relative bg-white p-2 rounded-full shadow-md">
-            <FaRegBell className="text-[30px] text-black p-1" />
-            <span className="absolute top-1 right-1 block w-2.5 h-2.5 bg-yellow-400 rounded-full ring-2 ring-white"></span>
-          </div>
         </div>
       </div>
 
       {/* GRID ICONS */}
-      <div className="grid grid-cols-4 gap-4 px-6 py-5">
+      <div className="grid grid-cols-3 gap-4 px-6 py-5">
         {features.map((item, i) => (
           <Link key={i} href={item.href} className="flex flex-col items-center text-center hover:scale-105 transition-transform">
             <div className="w-18 h-18 rounded-full bg-main-gradient flex justify-center items-center shadow-md">
-              <Image src={item.icon} alt={item.name} width={40} height={40} />
+              <FontAwesomeIcon icon={item.icon} className="text-[40px] text-white" />
             </div>
             <p className="text-xs mt-2 font-medium text-gray-700">{item.name}</p>
           </Link>

@@ -13,7 +13,6 @@
 }
 
 body {
-  /* background: var(--background); */
   color: var(--foreground);
   font-family: "Inter", sans-serif;
   height: 100%;
@@ -35,4 +34,24 @@ body {
   left: 0;
   width: 100.1%;
   z-index: 50;
+}
+
+.active-page {
+  color: #ffbd59;
+}
+
+/* .text-header {
+  margin-top: -10px;
+} */
+
+
+@media screen and (min-width: 768px) {
+  html, .btnNav, AnimatePresence{
+    position: fixed;
+    left: 35vw;
+    width: 500px;
+  }
+  html{
+    border: #c2c2c2 2px solid;
+  }
 }

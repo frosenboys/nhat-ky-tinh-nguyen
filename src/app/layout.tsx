@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import LoadingOverlay from "./components/LoadingOverlay";
-import PullToRefresh from './components/PullToRefresh'
 import LayoutClient from "./LayoutClient";
 
 const interTight = Inter_Tight({
@@ -27,12 +26,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="vi">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <body className={`${inter.variable} ${interTight.variable} antialiased`}>
         <LayoutClient>
           <LoadingOverlay />
-          <PullToRefresh>
             {children}
-          </PullToRefresh>
         </LayoutClient>
       </body>
     </html>

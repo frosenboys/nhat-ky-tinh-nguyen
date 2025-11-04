@@ -1,0 +1,71 @@
+.rankBadge {
+  display: inline-flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: 9999px;
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  right: 20;
+}
+
+.normalBadge {
+  display: inline-flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: 9999px;
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  right: 20;
+}
+
+/* Top badges (use by adding the corresponding class) */
+.top1 {
+  color: red;
+}
+.top1 div{
+  background-image: url('/icons/top1.svg');
+}
+.top1 .crown{
+  width: 60px;
+  height: 60px;
+  background-image: url('/icons/crown1.svg');
+}
+.top2 {
+  color: rgb(148, 148, 148);
+}
+.top2 div{
+  background-image: url('/icons/top2.svg');
+}
+.top3 {
+  color: rgb(195, 137, 2);
+}
+.top3 div{
+  background-image: url('/icons/top3.svg');
+}
+
+.top-normal {
+  background-color: #1e40af;      /* bg-blue-800 */
+  min-width: 2rem;                /* min-w-8 */
+  height: 2rem;                   /* h-8 */
+  border-radius: 9999px;          /* rounded-full */
+  color: #ffffff;                 /* text-white */
+  display: flex;                  /* flex */
+  align-items: center;            /* items-center */
+  justify-content: center;        /* justify-center */
+  font-weight: 700;               /* font-bold */
+  font-size: 1.25rem;             /* text-xl */
+  line-height: 1.75rem;           /* text-xl line-height */
+  padding: 0.25rem;               /* p-1 */
+  position: absolute;             /* absolute */
+  right: 2.5rem;                  /* right-10 */
+}

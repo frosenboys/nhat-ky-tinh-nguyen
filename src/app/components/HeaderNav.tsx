@@ -1,6 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { FaSearch, FaRegBell } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import Link from 'next/link';
 
 export default function BottomNav() {
   return (
@@ -20,6 +24,13 @@ export default function BottomNav() {
         />
         <FaSearch className="text-gray-500" />
       </div>
+      <Link href={"/notifications"} className="flex items-center absolute right-5 top-30">
+        <div className="ml-auto relative bg-white p-1 pt-1.5 rounded-full shadow-md">
+          <FontAwesomeIcon icon={faBell} className="text-[20px] text-gray-700 p-1" />
+          <span className="absolute top-0 right-1 block w-2.5 h-2.5 bg-yellow-400 rounded-full ring-2 ring-white"></span>
+        </div>
+      </Link>
     </div>
+    
   )
 }

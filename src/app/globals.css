@@ -20,8 +20,10 @@ body {
   padding: 0;
   background-image: url('/images/background.png');
   background-size: cover;
-  background-position: center;
+  background-attachment: fixed;
+  background-position: center center;
   background-repeat: no-repeat;
+  overflow: auto;
 }
 
 .bg-main-gradient {
@@ -30,7 +32,7 @@ body {
 
 .btnNav{
   position: fixed;
-  bottom: -1;
+  bottom: 0;
   left: 0;
   width: 100.1%;
   z-index: 50;
@@ -40,15 +42,28 @@ body {
   color: #ffbd59;
 }
 
-/* .text-header {
-  margin-top: -10px;
-} */
+.limit-line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: var(--line-clamp-count, 8);
+  line-clamp: var(--line-clamp-count, 8);
+}
+
+/* Các class biến thể chỉ để gán giá trị */
+.limit-line-1 { --line-clamp-count: 1; }
+.limit-line-2 { --line-clamp-count: 2; }
+.limit-line-3 { --line-clamp-count: 3; }
+.limit-line-4 { --line-clamp-count: 4; }
+.limit-line-5 { --line-clamp-count: 5; }
+.limit-line-6 { --line-clamp-count: 6; }
+.limit-line-7 { --line-clamp-count: 7; }
+.limit-line-8 { --line-clamp-count: 8; }
 
 
 @media screen and (min-width: 768px) {
-  html, .btnNav, AnimatePresence{
-    position: fixed;
-    left: 35vw;
+  html,.btnNav, AnimatePresence{
+    margin: auto;
     width: 500px;
   }
   html{

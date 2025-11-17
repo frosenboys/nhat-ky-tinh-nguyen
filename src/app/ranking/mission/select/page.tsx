@@ -63,7 +63,7 @@ export default function HomePage() {
               <FontAwesomeIcon icon={faListCheck} className="text-[40px] p-1 pt-3" />
             </div>
           </div>
-          <span className="absolute left-7 -bottom-2 text-sm font-bold text-gray-800">Nhiệm vụ</span>
+          <span className="absolute left-6 -bottom-2 text-sm font-bold text-gray-800">Nhiệm vụ</span>
         </div>
       </div>
 

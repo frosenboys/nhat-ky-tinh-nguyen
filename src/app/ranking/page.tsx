@@ -2,7 +2,7 @@ import HeaderNav from '@/app/components/HeaderNav'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleRoof, faCircleUser, faListCheck, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faPeopleRoof, faUser, faListCheck, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage() {
 
@@ -22,19 +22,38 @@ export default function HomePage() {
         </div>
       </div>
       {/* CONTENT */}
-      <div className="card flex-1 flex flex-col w-full p-5 items-center justify-center">
-        <Link href={"/ranking/union"} className="card card-body w-full bg-gray-300 text-gray-600 rounded-lg text-3xl p-5 flex items-center mt-2">
-          <FontAwesomeIcon icon={faPeopleRoof} className="text-blue-700 text-6xl mb-4 mr-3" />
-          Theo chi đoàn
+      <div className="card flex-1 flex flex-col w-full p-5 items-center justify-center mt-10">
+        <Link href={"/ranking/personal"} className="card card-body w-full h-24 bg-gray-200 text-gray-600 rounded-full text-3xl p-5 relative flex items-center mx-5 mt-5 mt-2 pl-22">
+          <div className="flex-shrink-0 z-10 absolute -left-2">
+            <div className="bg-white rounded-full p-4">
+              <div className="bg-main-gradient text-white rounded-full w-16 h-16 flex items-center justify-center">
+                <FontAwesomeIcon icon={faUser} className="text-4xl" />
+              </div>
+            </div>
+          </div>
+          <span className="m-auto">Theo cá nhân</span>
         </Link>
-        <Link href={"/ranking/mission"} className="card card-body w-full bg-gray-300 text-gray-600 rounded-lg text-3xl p-5 flex items-center mt-2">
-          <FontAwesomeIcon icon={faListCheck} className="text-blue-700 text-6xl mb-4 mr-3" />
-          Theo nhiệm vụ
+        <Link href={"/ranking/union"} className="card card-body w-full h-24 bg-gray-200 text-gray-600 rounded-full text-3xl p-5 relative flex items-center mx-5 mt-5 mt-2 pl-22">
+          <div className="flex-shrink-0 z-10 absolute -left-2">
+            <div className="bg-white rounded-full p-4">
+              <div className="bg-main-gradient text-white rounded-full w-16 h-16 flex items-center justify-center">
+                <FontAwesomeIcon icon={faPeopleRoof} className="text-4xl" />
+              </div>
+            </div>
+          </div>
+          <span className="m-auto">Theo chi đoàn</span>
         </Link>
-        <Link href={"/ranking/personal"} className="card card-body w-full bg-gray-300 text-gray-600 rounded-lg text-3xl p-5 flex items-center mt-2">
-          <FontAwesomeIcon icon={faCircleUser} className="text-blue-700 text-6xl mb-4 mr-3" />
-          Theo cá nhân
+        <Link href={"/ranking/mission"} className="card card-body w-full h-24 bg-gray-200 text-gray-600 rounded-full text-3xl p-5 relative flex items-center mx-5 mt-5 mt-2 pl-22">
+          <div className="flex-shrink-0 z-10 absolute -left-2">
+            <div className="bg-white rounded-full p-4">
+              <div className="bg-main-gradient text-white rounded-full w-16 h-16 flex items-center justify-center">
+                <FontAwesomeIcon icon={faListCheck} className="text-4xl" />
+              </div>
+            </div>
+          </div>
+          <span className="m-auto">Theo nhiệm vụ</span>
         </Link>
+        
       </div>
 
       

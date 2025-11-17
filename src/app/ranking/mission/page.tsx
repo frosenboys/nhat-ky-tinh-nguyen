@@ -1,11 +1,57 @@
 'use client'
+import { useState, useEffect } from 'react'
 import HeaderNav from '@/app/components/HeaderNav'
-import Image from 'next/image'
-import styles from '../rankBadge.module.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleRoof, faRankingStar, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Link from 'next/link'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faRankingStar } from "@fortawesome/free-solid-svg-icons"
+import { fetchWOA } from '@/lib/api'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 export default function HomePage() {
+  const [missions, setMissions] = useState<any[]>([])
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchWOA('/mission/getAllMissions')
+        setMissions(data)
+      } catch (err: any) {
+        setError('Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ với dev ngay lập tức.')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  if (error)
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center text-red-500">
+        {error}
+        <button
+          onClick={() => {
+            Cookies.remove('token')
+            router.push('/login')
+          }}
+          className="mt-3 bg-main-gradient text-white rounded-full px-4 py-2"
+        >
+          Đăng nhập lại
+        </button>
+      </div>
+    )
+
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-500">
+        Đang tải dữ liệu...
+      </div>
+    )
+
   return (
     <div className="min-h-screen flex flex-col pb-24">
       {/* HEADER */}
@@ -17,62 +63,41 @@ export default function HomePage() {
               <FontAwesomeIcon icon={faRankingStar} className="text-[40px] p-1 pt-3" />
             </div>
           </div>
-          <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">BXH <br/>tháng 9</span>
+          <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">
+            BXH <br /> tháng 9
+          </span>
         </div>
-      </div>
-      <div className="absolute w-full text-center top-45 text-gray-900 font-bold text-xl flex justify-center items-center mt-2">
-        <Image src="/images/doan-truong.svg" alt="User" width={70} height={50} className="text-blue-500" />
-        <button onClick={() => history.back()} className="absolute right-6 text-sm font-bold text-white bg-blue-700 rounded-full w-10 h-10 flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowLeft} className="text-[20px]" />
-        </button>
       </div>
 
       {/* CONTENT */}
-      
-      <div className="w-full p-3 mt-15">
-        <div className="p-5 rounded-lg bg-gray-300 min-h-[60vh]">
-          <div className={`flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5 ${styles.top1}`}>
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <Image src={"/icons/crown1.svg"} alt="crown" width={30} height={30} className="relative -left-12 -top-5 -rotate-20"/>
-            <span className="-ml-5 text-sm max-w-[calc(100%-100px)] text-blue-700">Dư Thị Thanh Xuân -  Chi Đoàn GV</span>
-            <div className={`${styles.rankBadge} mr-2`} aria-hidden="true" />
-          </div>
+      <div className="p-5 mt-20">
+        <h2 className="text-gray-700 text-[16px] font-medium mx-3 text-center">
+          Hãy chọn nhiệm vụ bạn muốn xem hạng!
+        </h2>
 
-          <div className={`flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5 ${styles.top2}`}>
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <Image src={"/icons/crown2.svg"} alt="crown" width={30} height={30} className="relative -left-12 -top-5 -rotate-20 z-20"/>
-            <span className="-ml-5 text-sm max-w-[calc(100%-100px)] text-blue-700"> Nguyễn Thị Tường Vy -  Chi Đoàn 10A2</span>
-            <div className={`${styles.rankBadge} mr-2`} aria-hidden="true" />
-          </div>
-          
-          <div className={`flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5 ${styles.top3}`}>
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <Image src={"/icons/crown3.svg"} alt="crown" width={30} height={30} className="relative -left-12 -top-5 -rotate-20 z-20"/>
-            <span className="-ml-5 text-sm max-w-[calc(100%-100px)] text-blue-700">Trương Gia Kiệt - Chi Đoàn 11A9</span>
-            <div className={`${styles.rankBadge} mr-2`} aria-hidden="true" />
-          </div>
-
-          <div className="flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5">
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <span className="ml-2.5 text-sm max-w-[calc(100%-100px)] text-blue-700">Nguyễn Gia Huy - Chi Đoàn 12A3</span>
-            <div className={"bg-blue-800 min-w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xl p-1 absolute right-10"}>4</div>
-          </div>
-          
-          <div className="flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5">
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <span className="ml-2.5 text-sm max-w-[calc(100%-100px)] text-blue-700">Hà Ngọc Tiến -  Chi Đoàn GV</span>
-            <div className={"bg-blue-800 min-w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xl p-1 absolute right-10"}>5</div>
-          </div>
-
-          <div className="flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5">
-            <Image src={"/images/default-avatar.svg"} alt="avatar" width={40} height={40} className="" />
-            <span className="ml-2.5 text-sm max-w-[calc(100%-100px)] text-blue-700">Đoàn Thiên Nam - Chi Đoàn 12A2</span>
-            <div className={"bg-blue-800 min-w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xl p-1 absolute right-10"}>6</div>
-          </div>
-          
-          
-          </div>
+        <div className="flex flex-col space-y-5">
+          {missions.map((mission) => (             
+            <Link
+              key={mission.id}
+              href={`mission/upload?id=${mission.id}`}
+              className="relative flex items-center mx-5 mt-5"
+            >
+              <div className="flex-shrink-0 z-10 absolute -left-2">
+                <div className="bg-white rounded-full p-4">
+                  <div className="bg-main-gradient text-white rounded-full w-20 h-20 flex items-center justify-center">
+                    <h1 className="text-5xl font-bold">{mission.id}</h1>
+                  </div>
+                </div>
+              </div>
+              <div className="ml-4 flex-1 bg-gray-200 rounded-xl px-4 py-3 h-27 ml-10 pl-20">
+                <p className="text-sm text-gray-700 limit-text">
+                  {mission.missionName}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
+      </div>
     </div>
   )
 }

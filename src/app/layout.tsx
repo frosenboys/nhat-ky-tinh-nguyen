@@ -3,6 +3,7 @@ import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import LoadingOverlay from "./components/LoadingOverlay";
 import LayoutClient from "./LayoutClient";
+import { Toaster } from "react-hot-toast";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -18,19 +19,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Nhật kí tình nguyện | THPT Bình Long",
-  description: "Nhật kí tình nguyện cho học sinh trường THPT Bình Long",
+  description: "Nhật kí tình nguyện cho học sinh trường THPT Bình Long"
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" >
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <body className={`${inter.variable} ${interTight.variable} antialiased`}>
+      <body className={`${inter.variable} ${interTight.variable} `}>
         <LayoutClient>
           <LoadingOverlay />
-            {children}
+          {children}
+          <Toaster position="bottom-center"/>
         </LayoutClient>
       </body>
     </html>

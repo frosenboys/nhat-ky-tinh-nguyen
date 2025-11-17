@@ -21,13 +21,25 @@ export default function HomePage() {
       </div>
       {/* CONTENT */}
       <div className="card flex-1 flex flex-col w-full p-5 items-center justify-center">
-        <Link href={"/diary/personal"} className="card card-body w-full bg-gray-300 text-gray-600 rounded-lg text-3xl p-5 flex items-center mt-2">
-          <FontAwesomeIcon icon={faUser} className="text-blue-500 text-6xl mb-4" />
-          Cá nhân
+        <Link href={"/diary/personal"} className="card card-body w-full h-24 bg-gray-200 text-gray-600 rounded-full text-3xl p-5 relative flex items-center mx-5 mt-5 mt-2 pl-22">
+          <div className="flex-shrink-0 z-10 absolute -left-2">
+            <div className="bg-white rounded-full p-4">
+              <div className="bg-main-gradient text-white rounded-full w-16 h-16 flex items-center justify-center">
+                <FontAwesomeIcon icon={faUser} className="text-4xl" />
+              </div>
+            </div>
+          </div>
+          <span className="m-auto">Cá nhân</span>
         </Link>
-        <Link href={"/diary/school-union"} className="card card-body w-full bg-gray-300 text-gray-600 rounded-lg text-3xl p-5 flex items-center mt-2">
-          <Image src="/images/doan-truong.svg" alt="Doan truong" width={70} height={70} className="m-1" />
-          Đoàn trường
+        <Link href={"/diary/school-union"} className="card card-body w-full h-24 bg-gray-200 text-gray-600 rounded-full text-3xl p-5 relative flex items-center mx-5 mt-5 mt-2 pl-22">
+          <div className="flex-shrink-0 z-10 absolute -left-2">
+            <div className="bg-white rounded-full p-4">
+              <div className="text-white rounded-full w-16 h-16 flex items-center justify-center">
+                <Image src="/images/doan-truong.svg" alt="Doan truong" width={70} height={70} className="m-1" />
+              </div>
+            </div>
+          </div>
+          <span className="m-auto">Đoàn trường</span>
         </Link>
       </div>
     </div>

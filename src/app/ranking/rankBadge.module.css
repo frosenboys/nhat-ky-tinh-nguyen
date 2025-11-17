@@ -1,6 +1,6 @@
 .rankBadge {
   display: inline-flex;
-  position: absolute;
+  margin-left: auto;
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
@@ -10,7 +10,6 @@
   width: 60px;
   height: 60px;
   margin-top: 20px;
-  right: 20;
 }
 
 .normalBadge {

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 export default function LoadingOverlay() {
   const pathname = usePathname()
@@ -9,12 +10,12 @@ export default function LoadingOverlay() {
 
   useEffect(() => {
     setLoading(true)
-    const timer = setTimeout(() => setLoading(false), 1200)
+    const timer = setTimeout(() => setLoading(false), 1000)
     return () => clearTimeout(timer)
   }, [pathname])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {loading && (
         <motion.div
           key={pathname}
@@ -22,10 +23,36 @@ export default function LoadingOverlay() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-100 text-cyan-900"
-        >
-          <div className="animate-spin h-14 w-14 rounded-full border-t-4 border-b-4 border-cyan-900"></div>
-          <p className="mt-4 text-sm tracking-wide">Loading...</p>
+          className="fixed left-0 right-0 top-0 bottom-[env(safe-area-inset-bottom,0)] z-[9999] flex flex-col items-center justify-center bg-white text-black pointer-events-none select-none"
+>
+
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: 'linear'
+            }}
+          >
+            <Image
+              src="/images/logo.png"
+              alt="Loading Icon"
+              width={100}
+              height={100}
+              priority
+              style={{ filter: 'invert(0)' }}
+            />
+          </motion.div>
+
+          <motion.p
+            className="mt-4 text-sm tracking-wide font-medium text-black"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ delay: 0.2 }}
+          >
+            Đang tải...
+          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

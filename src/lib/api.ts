@@ -1,15 +1,15 @@
-
 import Cookies from 'js-cookie'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
-  console.log('🌐 API_URL:', API_URL)
-  console.log('📦 Endpoint:', `${API_URL}${endpoint}`)
+export async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
+  const token = Cookies.get('token')
+
   const res = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(options.headers || {}),
     },
     credentials: 'include',
@@ -20,15 +20,24 @@ async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
       Cookies.remove('token')
       window.location.href = '/login'
     }
-    throw new Error(`Lỗi khi gọi API: ${endpoint}`)
   }
 
   return res.json()
 }
 
-// export const getUserProfile = () => fetchWithAuth('/users/me')
-// export const getMissions = () => fetchWithAuth('/missions')
-// export const getDiary = () => fetchWithAuth('/diary')
-// export const getRanking = () => fetchWithAuth('/ranking')
-// export const getAll = () => fetchWithAuth('/all')
+export async function fetchWOA(endpoint: string, options: RequestInit = {}) {
+  const res = await fetch(`${API_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+    },
+    credentials: 'include',
+  })
 
+  if (!res.ok) {
+    throw new Error(`Lỗi khi gọi API: ${endpoint}`)
+  }
+
+  return res.json()
+}

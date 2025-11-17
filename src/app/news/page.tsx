@@ -80,6 +80,14 @@ export default function NewsPage() {
   if (loading)
     return <div className="min-h-screen flex justify-center items-center">Đang tải...</div>;
 
+  const truncateText = (text: string) => {
+      const maxLength = 100;
+      if (text.length > maxLength) {
+        return `${text.substring(0, maxLength)}...`;
+      }
+      return text;
+  };
+  
   return (
     <div className="min-h-screen pb-24">
 
@@ -105,18 +113,19 @@ export default function NewsPage() {
               {new Date(post.createdAt).toLocaleDateString("vi-VN")}
             </div>
 
+            <p className="text-gray-700 font-bold bg-gray-200 p-2 mb-2 rounded-lg text-sm word-break w-full">
+                {truncateText(post.content)}
+            </p>
             <div className="flex">
               <img
                 src={post.imageUrl}
                 alt=""
                 width={600}
                 height={400}
-                className="w-70 h-auto rounded-lg cursor-pointer"
+                className="w-auto h-auto rounded-lg cursor-pointer"
                 onClick={() => setSelectedImage(post.imageUrl)}
               />
-              <p className="text-gray-700 font-bold ml-2 bg-gray-200 p-2 rounded-lg text-sm word-break w-full">
-                {post.title}
-              </p>
+              
             </div>
 
             {/* ACTIONS */}

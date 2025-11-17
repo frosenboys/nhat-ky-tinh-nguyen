@@ -137,7 +137,7 @@ export default function NewsDetail() {
 
       {/* CONTENT */}
       <div className="px-4 mt-20">
-        <h1 className="text-xl font-bold text-gray-800">{news.title}</h1>
+        <h1 className="text-xl font-bold text-gray-800">{news.content}</h1>
 
         <div className="flex items-center gap-2 mt-2 text-gray-500 bg-white p-2 rounded-lg shadow-lg">
           <FontAwesomeIcon icon={faUserCircle} className="text-2xl text-gray-400" />

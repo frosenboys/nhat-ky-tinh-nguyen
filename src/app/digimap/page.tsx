@@ -29,7 +29,12 @@ export default function DigiMapPage() {
     load();
   }, []);
 
-  if (loading) setLoading(true);
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-500">
+        Đang tải dữ liệu...
+      </div>
+    )
 
   return (
     <div className="min-h-screen flex flex-col pb-24">

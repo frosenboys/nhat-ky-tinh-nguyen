@@ -1,4 +1,4 @@
-export async function uploadToCloudinary(blob: Blob) {
+export async function uploadToCloudinary(file: File) {
   const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
@@ -7,13 +7,13 @@ export async function uploadToCloudinary(blob: Blob) {
   }
 
   const formData = new FormData();
-  formData.append("file", blob);
+  formData.append("file", file);
   formData.append("upload_preset", preset);
 
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-    method: "POST",
-    body: formData,
-  });
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    { method: "POST", body: formData }
+  );
 
   const data = await res.json();
 
@@ -21,5 +21,5 @@ export async function uploadToCloudinary(blob: Blob) {
     throw new Error(data?.error?.message || "Upload error");
   }
 
-  return data.secure_url;
+  return data.secure_url; // trả string
 }

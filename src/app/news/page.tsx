@@ -129,7 +129,7 @@ export default function NewsPage() {
             </div>
 
             {/* ACTIONS */}
-            <div className="relative left-0 flex justify-around items-center mt-3 pt-3 py-2 bg-gray-100 rounded-lg shadow-md rounded-b-3xl">
+            <div className="relative left-0 flex justify-around items-center mt-3 pt-3 py-2 bg-gray-100 rounded-lg shadow-md rounded-b-3xl text-black">
 
               {/* LIKE */}
               <button

@@ -45,27 +45,27 @@ export default function ChangePasswordModal({ onClose }:any) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999]">
       <div className="bg-white p-5 rounded-lg w-[90%] max-w-sm shadow">
-        <h2 className="text-lg font-bold mb-4 text-center">Đổi mật khẩu</h2>
+        <h2 className="text-lg font-bold mb-4 text-center text-black">Đổi mật khẩu</h2>
 
         <div className="flex flex-col gap-3">
           <input
             type="password"
             placeholder="Mật khẩu cũ"
-            className="border p-2 rounded"
+            className="border p-2 rounded text-sky-600"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
           />
           <input
             type="password"
             placeholder="Mật khẩu mới"
-            className="border p-2 rounded"
+            className="border p-2 rounded text-sky-600"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
           <input
             type="password"
             placeholder="Nhập lại mật khẩu mới"
-            className="border p-2 rounded"
+            className="border p-2 rounded text-sky-600"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />

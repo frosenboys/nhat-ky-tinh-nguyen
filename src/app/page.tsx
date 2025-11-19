@@ -111,11 +111,8 @@ export default function HomePage() {
                   alt={`suggest-${i}`}
                   width={140}
                   height={90}
-                  className="rounded-xl object-cover flex-shrink-0 w-45"
+                  className="rounded-xl object-cover flex-shrink-0 w-45 h-15 cursor-pointer"
                 />
-                <p className="text-xs text-gray-600 mt-1 text-center w-[140px] line-clamp-2">
-                  {item.note || 'Hoạt động tình nguyện'}
-                </p>
               </div>
             ))
           ) : (

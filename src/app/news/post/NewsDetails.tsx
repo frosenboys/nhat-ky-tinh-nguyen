@@ -141,7 +141,7 @@ export default function NewsDetail() {
 
         <div className="flex items-center gap-2 mt-2 text-gray-500 bg-white p-2 rounded-lg shadow-lg">
           <FontAwesomeIcon icon={faUserCircle} className="text-2xl text-gray-400" />
-          <span>{news.author?.fullName || "Ẩn danh"}</span>
+          <span>{news.author?.fullName}</span>
 
           <span className="ml-auto text-sm">
             {new Date(news.createdAt).toLocaleDateString("vi-VN")}
@@ -182,14 +182,14 @@ export default function NewsDetail() {
 
         {/* COMMENT LIST */}
         <div className="space-y-4 bg-white p-2 rounded-lg shadow-md mt-6">
-          <h2 className="mb-2 font-bold text-xl">Bình luận</h2>
+          <h2 className="mb-2 font-bold text-xl text-black">Bình luận</h2>
 
           {news.comments.length === 0 && (
             <p className="text-gray-500">Chưa có bình luận nào</p>
           )}
 
           {news.comments.map((c: any) => (
-            <div key={c.id} className="bg-gray-100 p-3 rounded-lg">
+            <div key={c.id} className="bg-gray-100 p-3 rounded-lg text-black">
               <div className="flex items-center gap-2">
                 <img
                   src={c.user?.avatarUrl || "/images/default-avatar.svg"}
@@ -205,19 +205,19 @@ export default function NewsDetail() {
           ))}
         </div>
 
-        <div className="mt-5 flex gap-2 bg-white p-3 rounded-lg shadow-md">
+        <div className="mt-5 flex gap-2 bg-white p-2 rounded-lg shadow-md w-full">
           <input
             type="text"
             placeholder="Nhập bình luận..."
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
-            className="flex-1 border px-3 py-2 rounded-lg"
+            className="flex-5 border px-3 py-2 rounded-lg text-blue-800"
           />
 
           <button
             onClick={sendComment}
             disabled={sending}
-            className="bg-blue-600 text-white px-4 rounded-lg active:scale-95"
+            className="flex-1 bg-blue-600 text-white px-2 rounded-lg active:scale-95"
           >
             Gửi
           </button>

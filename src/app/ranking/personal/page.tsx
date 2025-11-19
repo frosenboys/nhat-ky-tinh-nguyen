@@ -91,7 +91,7 @@ export default function RankPersonalPage() {
                 className={`flex items-center bg-white w-full h-12 rounded-full p-2 text-blue-800 mb-5 ${topClass}`}
               >
                 <img
-                  src={user.avatarUrl}
+                  src={user.avatarUrl || "/images/default-avatar.svg"}
                   alt="avatar"
                   width={40}
                   height={40}

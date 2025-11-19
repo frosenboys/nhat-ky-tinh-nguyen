@@ -114,19 +114,19 @@ export default function ChatUI() {
       </div>
 
       {/* Input */}
-      <div className="p-4 flex items-center gap-2 bg-white ">
+      <div className="p-2 flex items-center gap-2 bg-white">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Nhập câu hỏi..."
-          className="flex-1 px-4 py-2 border rounded-full outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-6 px-2 py-2 border rounded-full outline-none focus:ring-2 focus:ring-blue-500 text-black"
         />
 
         <button
           onClick={sendMessage}
           disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-full active:scale-95 disabled:opacity-50"
+          className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-full active:scale-95 disabled:opacity-50"
         >
           Gửi
         </button>

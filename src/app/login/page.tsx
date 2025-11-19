@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function LoginPage() {
@@ -39,9 +38,15 @@ export default function LoginPage() {
     }
   }
 
+  const forgotPassword = () => {
+    alert(
+      'Vui lòng liên hệ Ban Chấp Hành Đoàn Trường để được hỗ trợ lấy lại mật khẩu.'
+    )
+  }
+  
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="w-full min-h-screen sm:min-h-[700px] shadow-lg flex flex-col">
+    <div className="min-h-screen flex justify-center items-center ">
+      <div className="w-full min-h-screen sm:min-h-[700px] flex flex-col">
         {/* HEADER */}
         <div className="bg-main-gradient text-white text-center px-4 py-5">
           <h1 className="text-xl font-bold">NHẬT KÝ TÌNH NGUYỆN</h1>
@@ -60,7 +65,6 @@ export default function LoginPage() {
             className="object-cover"
           />
         </div>
-
         {/* FORM ĐĂNG NHẬP */}
         <div className="flex-1 px-6 py-8 flex flex-col justify-center">
           <form onSubmit={handleLogin} className="flex flex-col space-y-4">
@@ -74,7 +78,7 @@ export default function LoginPage() {
                   value={studentId}
                   onChange={(e) => setStudentId(e.target.value)}
                   required
-                  className="w-full border border-blue-500 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full border border-blue-500 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
                 />
               </div>
 
@@ -87,7 +91,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full border border-blue-500 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full border border-blue-500 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
                 />
               </div>
             </div>
@@ -105,9 +109,9 @@ export default function LoginPage() {
             </button>
 
             <div className="ml-2 text-sm text-gray-500 mb-3">
-              <a href="#" className="underline font-bold">
+              <button onClick={forgotPassword} className="underline font-bold">
                 Bạn đã quên mật khẩu?
-              </a>
+              </button>
             </div>
           </form>
 

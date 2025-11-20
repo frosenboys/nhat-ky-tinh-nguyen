@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+
+  complier: {
+    removeConsole: true,
+  },
 };
 
 export default nextConfig;

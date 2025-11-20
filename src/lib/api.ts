@@ -35,9 +35,5 @@ export async function fetchWOA(endpoint: string, options: RequestInit = {}) {
     credentials: 'include',
   })
 
-  if (!res.ok) {
-    throw new Error(`Lỗi khi gọi API: ${endpoint}`)
-  }
-
   return res.json()
 }

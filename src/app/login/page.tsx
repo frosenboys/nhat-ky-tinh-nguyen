@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import toast from "react-hot-toast"
+import { fetchWOA } from "@/lib/api"
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function LoginPage() {
@@ -18,17 +21,16 @@ export default function LoginPage() {
     setError('')
 
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetchWOA("/auth/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentId, password }),
       })
 
-      if (!res.ok) throw new Error('Sai mã số đoàn viên hoặc mật khẩu!')
+      if (res.status === 0) return toast.error(res.message);
 
-      const data = await res.json()
-      Cookies.set('token', data.access_token, { expires: 7 })
-      Cookies.set('fullName', data.user.fullName, { expires: 7 })
+      Cookies.set('token', res.access_token, { expires: 7 })
+      Cookies.set('fullName', res.user.fullName, { expires: 7 })
 
       router.push('/')
     } catch (err: any) {

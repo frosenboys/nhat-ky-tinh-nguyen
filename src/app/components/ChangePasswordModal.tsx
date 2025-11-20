@@ -32,8 +32,14 @@ export default function ChangePasswordModal({ onClose }:any) {
         headers: { "Content-Type": "application/json" }
       })
 
-      toast.success("Đổi mật khẩu thành công!")
-      onClose()
+      if (!res.ok) {
+        const errData = await res.json()
+        throw new Error(errData.message || "Đổi mật khẩu thất bại")
+      }
+      else {
+        toast.success("Đổi mật khẩu thành công!")
+        onClose()
+      }
 
     } catch (err: any) {
       toast.error(err.message || "Đổi mật khẩu thất bại")

@@ -10,7 +10,7 @@ export default function LoadingOverlay() {
 
   useEffect(() => {
     setLoading(true)
-    const timer = setTimeout(() => setLoading(false), 1000)
+    const timer = setTimeout(() => setLoading(false), 1500)
     return () => clearTimeout(timer)
   }, [pathname])
 
@@ -19,8 +19,7 @@ export default function LoadingOverlay() {
       {loading && (
         <motion.div
           key={pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
           className="fixed left-0 right-0 top-0 bottom-[env(safe-area-inset-bottom,0)] z-[9999] flex flex-col items-center justify-center bg-white text-black pointer-events-none select-none"
@@ -46,10 +45,7 @@ export default function LoadingOverlay() {
 
           <motion.p
             className="mt-4 text-sm tracking-wide font-medium text-black"
-            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ delay: 0.2 }}
           >
             Đang tải...
           </motion.p>

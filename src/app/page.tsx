@@ -87,9 +87,7 @@ export default function HomePage() {
                 <img
                   src={item.image || '/images/test.png'}
                   alt={`news-${i}`}
-                  width={140}
-                  height={90}
-                  className="rounded-xl object-cover flex-shrink-0 w-29"
+                  className="rounded-xl object-cover flex-shrink-0 w-30 h-20 cursor-pointer shadow-md border border-gray-200"
                 />
               </Link>
             ))
@@ -99,19 +97,18 @@ export default function HomePage() {
         </div>
 
         {/* SUGGESTIONS */}
-        <h2 className="text-gray-700 font-medium mx-5 mt-5 mb-2">
+        <h2 className="text-gray-700 font-medium mx-5 mt-8 mb-2">
           Gợi ý
         </h2>
         <div className="flex gap-3 overflow-x-auto pb-2 justify-center">
           {latestSubs.length > 0 ? (
             latestSubs.map((item, i) => (
-              <div key={i} className="flex flex-col items-center" onClick={() => window.location.href=`/news`}>
+              <div key={i} onClick={() => window.location.href=`/news`}>
                 <img
                   src={item.imageLink || '/images/test.png'}
                   alt={`suggest-${i}`}
-                  width={140}
-                  height={90}
-                  className="rounded-xl object-cover flex-shrink-0 w-45 h-15 cursor-pointer"
+                  
+                  className="rounded-xl object-cover flex-shrink-0 w-40 h-25 cursor-pointer shadow-md border border-gray-200"
                 />
               </div>
             ))

@@ -49,12 +49,12 @@ export default function NotificationsPage() {
       <div className="bg-main-gradient text-white p-4 relative mb-5 pb-16">
         <HeaderNav />
         <div className="absolute left-6 -bottom-14 flex flex-col items-center">
-          <div className="bg-white rounded-full p-[20px] shadow-md">
+          <div className="bg-white rounded-full p-[20px]">
             <div className="bg-main-gradient text-white rounded-full p-3">
               <FontAwesomeIcon icon={faBell} className="text-[40px] p-1 pt-3" />
             </div>
           </div>
-          <span className="absolute left-6 -bottom-8 text-sm font-bold text-gray-800 text-center">
+          <span className="absolute left-6 -bottom-6 text-sm font-bold text-gray-800 text-center">
             Thông báo
           </span>
         </div>

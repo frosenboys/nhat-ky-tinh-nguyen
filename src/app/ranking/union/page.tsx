@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPeopleRoof, faRankingStar, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import styles from '../rankBadge.module.css'
 import { fetchWOA } from '@/lib/api'
+import Cookies from 'js-cookie'
 
 export default function RankUnionPage() {
   const [ranking, setRanking] = useState<any[]>([])
@@ -53,7 +54,7 @@ export default function RankUnionPage() {
             </div>
           </div>
           <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">
-            BXH <br /> tháng 9
+            BXH <br /> tháng {Cookies.get('monthNow')}
           </span>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function HomePage() {
             </div>
           </div>
           <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">
-            BXH <br /> tháng 9
+            BXH <br /> tháng {Cookies.get('monthNow')}
           </span>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function HomePage() {
           {missions.map((mission) => (             
             <Link
               key={mission.id}
-              href={`mission/upload?id=${mission.id}`}
+              href={`mission/select?id=${mission.id}`}
               className="relative flex items-center mx-5 mt-5"
             >
               <div className="flex-shrink-0 z-10 absolute -left-2">

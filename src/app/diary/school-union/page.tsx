@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { fetchWOA } from "@/lib/api";
+import Cookies from 'js-cookie'
 
 export default function DiaryUnionPage() {
   const [missions, setMissions] = useState<any[]>([]);
@@ -54,7 +55,7 @@ export default function DiaryUnionPage() {
             </div>
           </div>
           <span className="absolute left-7.5 -bottom-7 text-sm font-bold text-gray-800">
-            Nhật ký tháng 9
+            Nhật ký tháng {Cookies.get('monthNow')}
           </span>
         </div>
 

@@ -6,8 +6,6 @@ import Cookies from 'js-cookie'
 import toast from "react-hot-toast"
 import { fetchWOA } from "@/lib/api"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-
 export default function LoginPage() {
   const [studentId, setStudentId] = useState('')
   const [password, setPassword] = useState('')
@@ -19,7 +17,9 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-
+    const d = new Date();
+    let month = d.getMonth()+1;
+    Cookies.set('monthNow', month.toString());
     try {
       const res = await fetchWOA("/auth/login", {
         method: 'POST',
@@ -30,7 +30,8 @@ export default function LoginPage() {
       if (res.status === 0) return toast.error(res.message);
 
       Cookies.set('token', res.access_token, { expires: 7 })
-      Cookies.set('fullName', res.user.fullName, { expires: 7 })
+      Cookies.set('fullName', res.user.fullName)
+      Cookies.set('avatarUrl', res.user.avatarUrl)
 
       router.push('/')
     } catch (err: any) {

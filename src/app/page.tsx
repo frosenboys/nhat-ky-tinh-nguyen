@@ -6,12 +6,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocationDot } from "@fortawesome/free-solid-svg-icons"
-import { fetchWOA } from '@/lib/api'
+import { fetchWithAuth, fetchWOA } from '@/lib/api'
 
 export default function HomePage() {
   const [fullName, setFullName] = useState<string>('Đoàn viên')
   const [news, setNews] = useState<any[]>([])
   const [latestSubs, setLatestSubs] = useState<any[]>([])
+  const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
 
   useEffect(() => {
     const name = Cookies.get('fullName')
@@ -22,6 +23,10 @@ export default function HomePage() {
         const data = await fetchWOA('/main/main_page')
         setNews(data.news || [])
         setLatestSubs(data.latestSubmissions || [])
+
+        fetchWithAuth('/users/profile').then(res => {
+          if (res.avatarUrl) setAvatarUrl(res.avatarUrl)
+        })
       } catch (err) {
         console.error('Lỗi khi load trang chính:', err)
       }
@@ -45,8 +50,8 @@ export default function HomePage() {
       <div className="bg-main-gradient text-white p-4 rounded-b-3xl relative mb-5">
         <HeaderNav />
         <div className="flex items-center">
-          <Image
-            src="/images/default-avatar.svg"
+          <img
+            src={avatarUrl}
             alt="Avatar"
             width={50}
             height={50}

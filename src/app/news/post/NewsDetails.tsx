@@ -13,8 +13,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 export default function NewsDetail() {
+  const token = Cookies.get("token");
+  const isLoggedIn = !!token;
   const searchParams = useSearchParams();
   const id = Number(searchParams.get("id"));
 
@@ -34,10 +37,26 @@ export default function NewsDetail() {
       }
       setLoading(false);
     };
-    loadDetail();
+    if (id) {
+      loadDetail();
+    }
   }, [id]);
 
+  // Lock body scroll when image modal is open
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedImage]);
+
   const likePost = async () => {
+    if (!isLoggedIn) return;
     if (news.liked) return;
     try {
       const res = await fetchWithAuth(`/news/${id}/like`, {
@@ -59,6 +78,7 @@ export default function NewsDetail() {
   };
 
   const sendComment = async () => {
+    if (!isLoggedIn) return;
     if (!commentInput.trim()) return;
 
     setSending(true);
@@ -120,19 +140,24 @@ export default function NewsDetail() {
         <div className="absolute left-6 -bottom-16 flex flex-col items-center">
           <div className="bg-white rounded-full p-[20px]">
             <div className="bg-main-gradient text-white rounded-full p-3">
-              <FontAwesomeIcon icon={faComment} className="text-[40px] p-1 pt-3" />
+              <FontAwesomeIcon
+                icon={faComment}
+                className="text-[40px] p-1 pt-3"
+              />
             </div>
           </div>
           <span className="absolute left-9 -bottom-2 text-sm font-bold text-gray-800">
             Bài viết
           </span>
         </div>
-        <button
-          onClick={() => history.back()}
-          className="absolute right-6 -bottom-15 text-sm font-bold text-white bg-blue-700 rounded-full w-10 h-10 flex items-center justify-center"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} className="text-[20px]" />
-        </button>
+        {isLoggedIn && (
+          <button
+            onClick={() => history.back()}
+            className="absolute right-6 -bottom-15 text-sm font-bold text-white bg-blue-700 rounded-full w-10 h-10 flex items-center justify-center"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} className="text-[20px]" />
+          </button>
+        )}
       </div>
 
       {/* CONTENT */}
@@ -140,7 +165,10 @@ export default function NewsDetail() {
         <h1 className="text-xl font-bold text-gray-800">{news.content}</h1>
 
         <div className="flex items-center gap-2 mt-2 text-gray-500 bg-white p-2 rounded-lg shadow-lg">
-          <FontAwesomeIcon icon={faUserCircle} className="text-2xl text-gray-400" />
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="text-2xl text-gray-400"
+          />
           <span>{news.author?.fullName}</span>
 
           <span className="ml-auto text-sm">
@@ -159,23 +187,37 @@ export default function NewsDetail() {
 
         <div className="flex gap-10 mt-4 text-gray-700 bg-white p-4 rounded-lg shadow-md justify-around">
           <div className="flex items-center gap-1">
-            <FontAwesomeIcon
-              icon={faHeart}
-              className={`text-[26px] ${
-                news.liked ? "text-red-600" : "text-blue-600"
-              } cursor-pointer active:scale-90`}
-              onClick={likePost}
-            />
+            {isLoggedIn && (
+              <FontAwesomeIcon
+                icon={faHeart}
+                className={`text-[26px] ${
+                  news.liked ? "text-red-600" : "text-blue-600"
+                } cursor-pointer active:scale-90`}
+                onClick={likePost}
+              />
+            )}
+            {!isLoggedIn && (
+              <FontAwesomeIcon
+                icon={faHeart}
+                className="text-[26px] text-gray-600 disable"
+              />
+            )}
             <span>{news._count.likes}</span>
           </div>
 
           <div className="flex items-center gap-1">
-            <FontAwesomeIcon icon={faComment} className="text-blue-600 text-[26px]" />
+            <FontAwesomeIcon
+              icon={faComment}
+              className="text-blue-600 text-[26px]"
+            />
             <span>{news._count.comments}</span>
           </div>
 
           <button className="flex flex-col items-center" onClick={share}>
-            <FontAwesomeIcon icon={faLink} className="text-blue-600 text-[30px]" />
+            <FontAwesomeIcon
+              icon={faLink}
+              className="text-blue-600 text-[30px]"
+            />
             Share
           </button>
         </div>
@@ -198,30 +240,33 @@ export default function NewsDetail() {
                   className="rounded-full"
                   alt=""
                 />
-                <b>{c.user?.fullName}</b>
+                <b>{c.user.fullName}</b>
               </div>
               <p className="mt-1 text-sm">{c.content}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-5 flex gap-2 bg-white p-2 rounded-lg shadow-md w-full">
-          <input
-            type="text"
-            placeholder="Nhập bình luận..."
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-            className="flex-5 border px-3 py-2 rounded-lg text-blue-800"
-          />
+        {/* COMMENT INPUT */}
+        {isLoggedIn && (
+          <div className="mt-5 flex gap-2 bg-white p-2 rounded-lg shadow-md w-full">
+            <input
+              type="text"
+              placeholder="Nhập bình luận..."
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+              className="flex-5 border px-3 py-2 rounded-lg text-blue-800"
+            />
 
-          <button
-            onClick={sendComment}
-            disabled={sending}
-            className="flex-1 bg-blue-600 text-white px-2 rounded-lg active:scale-95"
-          >
-            Gửi
-          </button>
-        </div>
+            <button
+              onClick={sendComment}
+              disabled={sending}
+              className="flex-1 bg-blue-600 text-white px-2 rounded-lg active:scale-95"
+            >
+              Gửi
+            </button>
+          </div>
+        )}
       </div>
 
       {/* IMAGE MODAL */}
@@ -232,7 +277,7 @@ export default function NewsDetail() {
         >
           <img
             src={selectedImage}
-            className="rounded-lg max-h-[90vh]"
+            className="rounded-lg max-h-[90vh] overflow-hidden"
             alt=""
           />
         </div>

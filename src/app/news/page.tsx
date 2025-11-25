@@ -142,7 +142,7 @@ export default function NewsPage() {
                 <FontAwesomeIcon
                   icon={faHeart}
                   className={`text-[30px] my-1 ${
-                    post.liked ? "text-red-600" : "text-gray-400"
+                    post.liked ? "text-red-600" : "text-blue-600"
                   }`}
                 />
                 <span className="font-bold">{post._count.likes}</span>
@@ -153,7 +153,7 @@ export default function NewsPage() {
                 onClick={() => (window.location.href = `/news/post?id=${post.id}`)}
                 className="flex flex-col items-center"
               >
-                <FontAwesomeIcon icon={faComment} className="text-gray-400 text-[30px]" />
+                <FontAwesomeIcon icon={faComment} className="text-blue-600 text-[30px]" />
                 <span className="font-bold">{post._count.comments}</span>
               </button>
 

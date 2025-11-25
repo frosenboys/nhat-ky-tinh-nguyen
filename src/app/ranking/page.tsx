@@ -1,11 +1,13 @@
+'use client'
 import HeaderNav from '@/app/components/HeaderNav'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleRoof, faUser, faListCheck, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import Cookies from 'js-cookie'
+import moment from 'moment';
 
 export default function HomePage() {
-
+  const monthNow = Cookies.get('monthNow');
   return (
     <div className="min-h-screen flex flex-col pb-24">
       {/* HEADER */}
@@ -17,7 +19,7 @@ export default function HomePage() {
               <FontAwesomeIcon icon={faRankingStar} className="text-[40px] p-1 pt-3" />
             </div>
           </div>
-          <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">BXH <br/>tháng 9</span>
+          <span className="absolute left-8.5 -bottom-7 text-sm font-bold text-gray-800 text-center">BXH <br/>tháng <span>{moment().month() + 1}</span></span>
           
         </div>
       </div>

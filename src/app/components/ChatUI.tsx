@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 
 export default function ChatUI() {
   const [messages, setMessages] = useState<
@@ -94,9 +97,14 @@ export default function ChatUI() {
             {msg.bot && (
               <div className="flex justify-start">
                 <div className="bg-gray-200 text-black px-4 py-2 rounded-xl max-w-[75%] shadow">
-                  {msg.bot}
+                  <div className="prose prose-sm prose-p:my-1 prose-li:my-0 max-w-none">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {msg.bot}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               </div>
+
             )}
           </div>
         ))}

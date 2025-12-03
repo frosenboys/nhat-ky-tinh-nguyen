@@ -9,9 +9,6 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import toast from "react-hot-toast";
-import { Lobster } from 'next/font/google';
-
-const lobster = Lobster({ subsets: ['latin'], weight: '400' });
 
 export default function BottomNav() {
   const pathName = usePathname();
@@ -24,7 +21,7 @@ export default function BottomNav() {
     }
 
     // ======================================
-    // 🔥 Detect connected to internet or not
+    // Detect internet connection status
     // ======================================
 
     const handleOffline = () => {

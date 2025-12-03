@@ -19,6 +19,7 @@ export default function UploadPageContent() {
   const [message, setMessage] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [mission, setMission] = useState<any>(null)
+  const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const searchParams = useSearchParams()
@@ -32,6 +33,10 @@ export default function UploadPageContent() {
       try {
         const data = await fetchWithAuth(`/mission/getMissionbyId/${missionId}`)
         setMission(data)
+
+        await fetchWithAuth('/users/profile').then(res => {
+          if (res.avatarUrl) setAvatarUrl(res.avatarUrl)
+        })
       } catch (err) {
         toast.error('Không tải được nhiệm vụ!')
       }
@@ -62,7 +67,7 @@ export default function UploadPageContent() {
   // Submit
   const handleSubmit = async () => {
     if (!file) return toast.error('Vui lòng chọn hình ảnh!')
-    if (!missionId) return toast.error('Thiếu ID nhiệm vụ!')
+    if (message.trim() === '') return toast.error('Vui lòng nhập thông điệp!')
 
     setLoading(true)
     try {
@@ -127,8 +132,8 @@ export default function UploadPageContent() {
               </div>
             </div>
 
-            <div className="ml-4 flex-1 bg-gray-200 rounded-xl px-4 py-3 h-27 ml-10 pl-20">
-              <p className="text-sm text-gray-700 limit-text">
+            <div className="ml-4 flex-1 bg-gray-200 rounded-xl px-4 py-3 h-27 ml-10 pl-20 flex items-center">
+              <p className="text-md text-gray-700 limit-text">
                 {mission.missionName}
               </p>
             </div>
@@ -140,12 +145,12 @@ export default function UploadPageContent() {
       </div>
 
       {/* Upload box */}
-      <div className="p-5">
+      <div className="p-5 mt-5">
         <div className="relative bg-gray-200 rounded-[13px] shadow-md overflow-visible">
 
           {/* Avatar */}
           <div className="absolute -top-10 left-6 w-20 h-20 rounded-full border-4 border-white bg-white overflow-hidden">
-            <Image src="/images/default-avatar.svg" alt="avatar" width={80} height={80} className="object-cover" />
+            <img src={avatarUrl} alt="avatar" width={80} height={80} className="object-cover" />
           </div>
 
           {/* Hint text */}
@@ -164,7 +169,7 @@ export default function UploadPageContent() {
               />
             ) : (
               <div
-                className="cursor-pointer text-center"
+                className="cursor-pointer text-center mt-10"
                 onClick={() => fileInputRef.current?.click()}
               >
                 <FontAwesomeIcon icon={faCloudArrowUp} className="text-[120px] text-gray-400" />

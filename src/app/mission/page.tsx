@@ -87,11 +87,12 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <div className="ml-4 flex-1 bg-gray-200 rounded-xl px-4 py-3 h-27 ml-10 pl-20">
-                <p className="text-sm text-gray-700 limit-text">
+              <div className="ml-4 flex-1 bg-gray-200 rounded-xl px-4 py-3 h-27 ml-10 pl-20 flex items-center">
+                <p className="text-md text-gray-700 limit-text">
                   {mission.missionName}
                 </p>
               </div>
+
             </Link>
           ))}
         </div>

@@ -55,7 +55,8 @@ export default function HomePage() {
             alt="Avatar"
             width={50}
             height={50}
-            className="rounded-full border-2 border-white bg-white"
+            className="rounded-full border-2 border-white bg-white hover:cursor-pointer"
+            onClick={() => { location.href = "/profile" }}
           />
           <div className="ml-3">
             <p className="text-sm font-semibold">CHÀO MỪNG!</p>

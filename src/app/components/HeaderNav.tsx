@@ -9,7 +9,9 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import toast from "react-hot-toast";
+import { Lobster } from 'next/font/google';
 
+const lobster = Lobster({ subsets: ['latin'], weight: '400' });
 
 export default function BottomNav() {
   const pathName = usePathname();
@@ -53,15 +55,20 @@ export default function BottomNav() {
         alt="fist"
         width={70}
         height={70}
+        onClick={() => { location.href = '/' }}
       />
 
       {/* Search Bar */}
-      <div className="bg-white flex items-center rounded-full px-3 py-2 mb-3 w-full mt-3">
+      <div
+        className="bg-white flex items-center rounded-full px-3 py-2 mb-3 w-full mt-3 hover:cursor-pointer"
+        onClick={() => { location.href = "/chatbot" }}
+      >
         <div className="flex-1 text-sm text-gray-400 focus:outline-none px-2">
-          Bạn muốn tìm gì
+          Bạn muốn tìm gì ?
         </div>
         <FaSearch className="text-gray-500" />
       </div>
+      
 
       <Link href={"/notifications"} className="flex items-center absolute right-5 top-30">
         <div className="ml-auto relative bg-white p-1 pt-1.5 rounded-full shadow-md">

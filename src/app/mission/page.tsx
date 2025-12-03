@@ -74,7 +74,7 @@ export default function HomePage() {
         </h2>
 
         <div className="mt-6 flex flex-col space-y-5">
-          {missions.map((mission) => (             
+          {missions.map((mission) => (
             <Link
               key={mission.id}
               href={`mission/upload?id=${mission.id}`}

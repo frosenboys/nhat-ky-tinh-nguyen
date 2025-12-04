@@ -3,11 +3,9 @@ import HeaderNav from '@/app/components/HeaderNav'
 import Link from 'next/link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleRoof, faUser, faListCheck, faRankingStar } from "@fortawesome/free-solid-svg-icons";
-import Cookies from 'js-cookie'
 import moment from 'moment';
 
 export default function HomePage() {
-  const monthNow = Cookies.get('monthNow');
   return (
     <div className="min-h-screen flex flex-col pb-24">
       {/* HEADER */}

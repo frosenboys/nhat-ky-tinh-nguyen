@@ -42,9 +42,7 @@ export default function LoginPage() {
   }
 
   const forgotPassword = () => {
-    alert(
-      'Vui lòng liên hệ Ban Chấp Hành Đoàn Trường để được hỗ trợ lấy lại mật khẩu.'
-    )
+    toast.error("Vui lòng liên hệ cán bộ phụ trách để lấy lại mật khẩu.")
   }
   
   return (

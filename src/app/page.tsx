@@ -3,19 +3,19 @@ import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import HeaderNav from '@/app/components/HeaderNav'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { fetchWithAuth, fetchWOA } from '@/lib/api'
 
+
 export default function HomePage() {
-  const [fullName, setFullName] = useState<string>('null')
+  const [fullName, setFullName] = useState<string>('')
   const [news, setNews] = useState<any[]>([])
   const [latestSubs, setLatestSubs] = useState<any[]>([])
   const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
-
   useEffect(() => {
-    setFullName(Cookies.get('fullName') || 'null')
-
+    setFullName(Cookies.get('fullName') || toast.error("Có gì đó sai sai, vui lòng đăng nhập lại!"))
     async function loadData() {
       try {
         const data = await fetchWOA('/main/main_page')
@@ -25,8 +25,9 @@ export default function HomePage() {
         fetchWithAuth('/users/profile').then(res => {
           if (res.avatarUrl) setAvatarUrl(res.avatarUrl)
         })
+        
       } catch (err) {
-        console.error('Lỗi khi load trang chính:', err)
+        toast.error("Không thể tải dữ liệu trang chính")
       }
     }
 
@@ -96,7 +97,7 @@ export default function HomePage() {
               </Link>
             ))
           ) : (
-            <p className="text-gray-500 text-sm">Đang tải tin tức...</p>
+            <p className="text-gray-500 text-sm">Chưa có tin tức nào</p>
           )}
         </div>
 
@@ -117,7 +118,7 @@ export default function HomePage() {
               </div>
             ))
           ) : (
-            <p className="text-gray-500 text-sm">Đang tải gợi ý...</p>
+            <p className="text-gray-500 text-sm">Chưa có bài đăng nào...</p>
           )}
         </div>
       </div>

@@ -18,8 +18,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nhật kí tình nguyện | THPT Bình Long",
-  description: "Nhật kí tình nguyện cho học sinh trường THPT Bình Long"
+  title: "Trang chủ - Nhật ký tình nguyện",
+  description: "Số hóa hoạt động tình nguyện của ĐVTN trường THPT Bình Long.",
+  openGraph: {
+    title: "Trang chủ - Nhật ký tình nguyện",
+    description: "Số hóa hoạt động tình nguyện của ĐVTN trường THPT Bình Long.",
+    url: "nhatkytinhnguyen.com",
+    siteName: "Nhật Ký Tình Nguyện",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

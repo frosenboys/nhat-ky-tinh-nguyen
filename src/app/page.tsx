@@ -33,11 +33,6 @@ export default function HomePage() {
     loadData()
   }, [])
 
-  if (fullName == 'null') {
-    location.href = '/login'
-    return null
-  }
-
   const features = [
     { name: 'Bản tin', icon: faNewspaper, href: '/news' },
     { name: 'Nhiệm vụ', icon: faListCheck, href: '/mission' },

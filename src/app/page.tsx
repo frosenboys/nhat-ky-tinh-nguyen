@@ -8,14 +8,13 @@ import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocati
 import { fetchWithAuth, fetchWOA } from '@/lib/api'
 
 export default function HomePage() {
-  const [fullName, setFullName] = useState<string>('Đoàn viên')
+  const [fullName, setFullName] = useState<string>('null')
   const [news, setNews] = useState<any[]>([])
   const [latestSubs, setLatestSubs] = useState<any[]>([])
   const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
 
   useEffect(() => {
-    const name = Cookies.get('fullName')
-    if (name) setFullName(name)
+    setFullName(Cookies.get('fullName') || 'null')
 
     async function loadData() {
       try {
@@ -33,6 +32,11 @@ export default function HomePage() {
 
     loadData()
   }, [])
+
+  if (fullName == 'null') {
+    location.href = '/login'
+    return null
+  }
 
   const features = [
     { name: 'Bản tin', icon: faNewspaper, href: '/news' },

@@ -4,22 +4,14 @@ import { FaSearch } from 'react-icons/fa'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 import toast from "react-hot-toast";
 
 export default function BottomNav() {
-  const pathName = usePathname();
   const router = useRouter();
 
   useEffect(() => {
-    const token = Cookies.get('token')
-    if (!token && pathName !== '/news/post') {
-      router.push('/login')
-    }
-
     // ======================================
     // Detect internet connection status
     // ======================================

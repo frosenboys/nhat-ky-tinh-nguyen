@@ -88,11 +88,13 @@ export default function ProfilePage() {
     }
   };
 
-
-
   // Logout
   const logout = () => {
-    Cookies.remove("token")
+    Cookies.remove('token')
+    Cookies.remove('fullName')
+    Cookies.remove('avatarUrl')
+    Cookies.remove('monthNow')
+
     toast.success("Đăng xuất thành công!")
     router.push("/login")
   }

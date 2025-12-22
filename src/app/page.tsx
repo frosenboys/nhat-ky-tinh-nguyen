@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { fetchWithAuth, fetchWOA } from '@/lib/api'
+import router from 'next/router'
 
 
 export default function HomePage() {
@@ -15,7 +16,10 @@ export default function HomePage() {
   const [latestSubs, setLatestSubs] = useState<any[]>([])
   const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
   useEffect(() => {
-    setFullName(Cookies.get('fullName') || toast.error("Có gì đó sai sai, vui lòng đăng nhập lại!"))
+    const name = Cookies.get('fullName') || ''
+    if (name) setFullName(name)
+    else logout()
+    
     async function loadData() {
       try {
         const data = await fetchWOA('/main/main_page')
@@ -33,6 +37,16 @@ export default function HomePage() {
 
     loadData()
   }, [])
+
+  const logout = () => {
+    Cookies.remove('token')
+    Cookies.remove('fullName')
+    Cookies.remove('avatarUrl')
+    Cookies.remove('monthNow')
+
+    toast.success("Đăng xuất thành công!")
+    router.push("/login")
+  }
 
   const features = [
     { name: 'Bản tin', icon: faNewspaper, href: '/news' },

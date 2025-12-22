@@ -17,8 +17,13 @@ export async function fetchWithAuth(endpoint: string, options: RequestInit = {})
 
   if (!res.ok) {
     if (res.status === 401) {
-      Cookies.remove('token')
-      window.location.href = '/login'
+      Cookies.remove('token');
+      Cookies.remove('fullName');
+      Cookies.remove('avatarUrl');
+      Cookies.remove('monthNow');
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
     }
   }
 

@@ -29,7 +29,7 @@ export default function LoginPage() {
 
       if (res.status === 0) return toast.error(res.message);
 
-      Cookies.set('token', res.access_token, { expires: 7 })
+      Cookies.set('token', res.access_token, { expires: 1 }) // 1 day
       Cookies.set('fullName', res.user.fullName)
       Cookies.set('avatarUrl', res.user.avatarUrl)
 

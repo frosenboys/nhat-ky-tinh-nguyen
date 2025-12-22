@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import HeaderNav from '@/app/components/HeaderNav'
 import Link from 'next/link'
@@ -7,7 +8,6 @@ import toast from 'react-hot-toast'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faNewspaper, faListCheck, faRankingStar, faBook, faComment, faMapLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { fetchWithAuth, fetchWOA } from '@/lib/api'
-import router from 'next/router'
 
 
 export default function HomePage() {
@@ -15,6 +15,7 @@ export default function HomePage() {
   const [news, setNews] = useState<any[]>([])
   const [latestSubs, setLatestSubs] = useState<any[]>([])
   const [avatarUrl, setAvatarUrl] = useState<string>('/images/default-avatar.svg')
+  const router = useRouter()
   useEffect(() => {
     const name = Cookies.get('fullName') || ''
     if (name) setFullName(name)
